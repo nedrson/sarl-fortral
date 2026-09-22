@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بطاقة عمل رقمية - وكيل عبور جمركي معتمد</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Tailwind CSS CDN for instant responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#0f172a',
+                            900: '#0b1329',
+                            950: '#050b18',
+                        },
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #050b14;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(245, 158, 11, 0.09) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(15, 23, 42, 0.85) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        .card-shadow {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(245, 158, 11, 0.12);
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-panel:hover {
+            border-color: rgba(245, 158, 11, 0.4);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-100 flex items-center justify-center p-3 sm:p-6 lg:p-10 select-none">
+
+    <div class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden card-shadow relative my-auto transition-all">
+        
+        <!-- Header Image & Overlay -->
+        <div class="relative h-48 md:h-56 lg:h-64 bg-slate-950 overflow-hidden flex items-end justify-center pb-4">
+            <!-- Background Port Image -->
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-35"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+            
+            <!-- Location Badge -->
+            <a id="badge-map-link" href="#" target="_blank" class="absolute top-4 right-4 bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur-md flex items-center gap-1.5 hover:bg-amber-500/30 transition">
+                <i class="fa-solid fa-location-dot"></i>
+                <span id="txt-location">ميناء عنابة - الجزائر</span>
+            </a>
+
+            <div class="relative z-10 -mb-10 md:-mb-12">
+                <div class="w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-gradient-to-tr from-amber-600 via-amber-500 to-amber-300 p-1 shadow-2xl">
+                    <div class="w-full h-full bg-slate-900 rounded-[14px] flex items-center justify-center text-amber-400 text-4xl md:text-5xl shadow-inner">
+                        <i class="fa-solid fa-ship"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-12 md:pt-16 px-5 sm:px-6 md:px-8 pb-6 md:pb-8 text-center">
+            
+            <!-- Main Title & Company -->
+            <h1 class="text-2xl md:text-3xl font-black text-white tracking-wide mb-1" id="txt-company-name">SARL FORTRAL</h1>
+            <h2 class="text-base md:text-lg font-bold text-amber-400 tracking-wide" id="txt-agent-title">وكيل عبور وتخليص جمركي معتمد</h2>
+            <p class="text-slate-400 text-xs md:text-sm font-semibold mt-0.5" id="txt-sub-title">Commissionnaire en Douane Agrée</p>
+
+            <div class="grid grid-cols-3 gap-2.5 md:gap-3 my-6 md:my-8">
+                
+                <!-- Phone Call Button -->
+                <a id="btn-phone" href="#" class="glass-panel p-3 md:p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition group">
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-lg md:text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <span class="text-[11px] md:text-xs font-bold text-slate-200">اتصال</span>
+                </a>
+
+                <!-- WhatsApp Button -->
+                <a id="btn-whatsapp" href="#" target="_blank" class="glass-panel p-3 md:p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition group">
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-green-500/15 text-green-400 flex items-center justify-center text-lg md:text-xl group-hover:scale-110 transition">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <span class="text-[11px] md:text-xs font-bold text-slate-200">واتساب</span>
+                </a>
+
+                <!-- Facebook Page Button -->
+                <a id="btn-facebook" href="#" target="_blank" class="glass-panel p-3 md:p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition group">
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-600/15 text-blue-400 flex items-center justify-center text-lg md:text-xl group-hover:scale-110 transition">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </div>
+                    <span class="text-[11px] md:text-xs font-bold text-slate-200">فيسبوك</span>
+                </a>
+
+                <!-- LinkedIn Profile Button -->
+                <a id="btn-linkedin" href="#" target="_blank" class="glass-panel p-3 md:p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition group">
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-sky-500/15 text-sky-400 flex items-center justify-center text-lg md:text-xl group-hover:scale-110 transition">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </div>
+                    <span class="text-[11px] md:text-xs font-bold text-slate-200">لينكد إن</span>
+                </a>
+
+                <!-- Direct Email Button -->
+                <button onclick="handleEmailCopy()" class="glass-panel p-3 md:p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition group cursor-pointer">
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-lg md:text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <span class="text-[11px] md:text-xs font-bold text-slate-200">إيميل</span>
+                </button>
+
+                <!-- TikTok Button -->
+                <a id="btn-tiktok" href="#" target="_blank" class="glass-panel p-3 md:p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition group">
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-slate-200/10 text-slate-100 flex items-center justify-center text-lg md:text-xl group-hover:scale-110 transition">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </div>
+                    <span class="text-[11px] md:text-xs font-bold text-slate-200">تيك توك</span>
+                </a>
+            </div>
+
+            <div class="text-right space-y-2.5 md:space-y-3 mb-6 md:mb-8">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-boxes-packing text-amber-400"></i> خدماتنا الرئيسية
+                </h3>
+
+                <!-- Service 1 -->
+                <div class="bg-slate-950/60 border border-slate-800/80 p-3 rounded-xl flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center text-sm flex-shrink-0">
+                        <i class="fa-solid fa-car"></i>
+                    </div>
+                    <div class="text-xs text-slate-200 font-semibold">تخليص سيارات الخواص والمجاهدين (أقل من 3 سنوات)</div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-slate-950/60 border border-slate-800/80 p-3 rounded-xl flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center text-sm flex-shrink-0">
+                        <i class="fa-solid fa-cubes"></i>
+                    </div>
+                    <div class="text-xs text-slate-200 font-semibold">التخليص الجمركي للحاويات والبضائع (استيراد / تصدير)</div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-slate-950/60 border border-slate-800/80 p-3 rounded-xl flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center text-sm flex-shrink-0">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+                    <div class="text-xs text-slate-200 font-semibold">المعاملات والإجراءات الجمركية والاستشارات اللوجستية</div>
+                </div>
+            </div>
+
+            <div class="pt-4 md:pt-5 border-t border-slate-800/80 grid grid-cols-2 gap-3">
+                <!-- Share Button -->
+                <button onclick="shareCard()" class="bg-amber-500 hover:bg-amber-600 active:scale-95 text-slate-950 font-black text-xs md:text-sm py-3 md:py-3.5 px-2 rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10 cursor-pointer">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <span>مشاركة البطاقة</span>
+                </button>
+                
+                <!-- Save VCard Contact Button -->
+                <button onclick="downloadVCard()" class="bg-slate-800 hover:bg-slate-700 active:scale-95 text-amber-400 font-bold text-xs md:text-sm py-3 md:py-3.5 px-2 rounded-xl transition flex items-center justify-center gap-2 border border-slate-700 cursor-pointer">
+                    <i class="fa-solid fa-address-book"></i>
+                    <span>حفظ جهة الاتصال</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="card-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-800 border border-amber-500/50 text-amber-300 px-5 py-2.5 rounded-xl text-xs font-bold shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+        <span id="toast-text">تم النسخ بنجاح</span>
+    </div>
+
+    <script>
+        /* 
+        ===================================================================
+        ⚙️ CONFIGURATION FOR NON-TECH USERS (إعدادات البيانات الشخصية)
+        ===================================================================
+        فقط قم بتغيير القيم الموجودة بين علامتي التناص '' لتحديث البطاقة بسرعة!
+        Change the values below between quotes to quickly update your card!
+        */
+        const CONFIG = {
+            companyName: 'SARL FORTRAL',                       // اسم الشركة أو المكتب
+            agentTitle: 'وكيل عبور وتخليص جمركي معتمد',       // الصفة باللغة العربية
+            subTitle: 'Commissionnaire en Douane Agrée',       // الصفة بالفرنسية
+            phone: '0550000000',                                // رقم الهاتف
+            whatsapp: '213550000000',                          // رقم الواتساب بدون رمز +
+            email: 'contact@sarlfortral.dz',                   // البريد الإلكتروني
+            facebookUrl: 'https://www.facebook.com/',          // رابط صفحة الفيسبوك
+            linkedinUrl: 'https://www.linkedin.com/',          // رابط حساب أو صفحة لينكد إن
+            tiktokUrl: 'https://www.tiktok.com/',              // رابط حساب تيك توك
+            locationName: 'ميناء عنابة - الجزائر',            // اسم الميناء أو العنوان
+            mapsUrl: 'https://maps.google.com/?q=Annaba+Port'  // رابط خرائط جوجل (يُستخدم في شارة الموقع أعلى الصورة)
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Apply text content
+            document.getElementById('txt-company-name').innerText = CONFIG.companyName;
+            document.getElementById('txt-agent-title').innerText = CONFIG.agentTitle;
+            document.getElementById('txt-sub-title').innerText = CONFIG.subTitle;
+            document.getElementById('txt-location').innerText = CONFIG.locationName;
+
+            // Apply links
+            document.getElementById('btn-phone').href = 'tel:' + CONFIG.phone;
+            document.getElementById('btn-whatsapp').href = 'https://wa.me/' + CONFIG.whatsapp;
+            document.getElementById('btn-facebook').href = CONFIG.facebookUrl;
+            document.getElementById('btn-linkedin').href = CONFIG.linkedinUrl;
+            document.getElementById('btn-tiktok').href = CONFIG.tiktokUrl;
+            document.getElementById('badge-map-link').href = CONFIG.mapsUrl;
+        });
+
+        
+        // Copy Email Action
+        function handleEmailCopy() {
+            copyToClipboard(CONFIG.email);
+            showToast('تم نسخ البريد الإلكتروني: ' + CONFIG.email);
+            setTimeout(() => {
+                window.location.href = 'mailto:' + CONFIG.email;
+            }, 500);
+        }
+
+        // Share Card URL
+        function shareCard() {
+            if (navigator.share) {
+                navigator.share({
+                    title: CONFIG.companyName,
+                    text: CONFIG.agentTitle + ' - ' + CONFIG.companyName,
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                copyToClipboard(window.location.href);
+                showToast("تم نسخ رابط البطاقة بنجاح!");
+            }
+        }
+
+        // Save Contact as VCard (.vcf)
+        function downloadVCard() {
+            const vcardData = `BEGIN:VCARD
+VERSION:3.0
+FN:${CONFIG.companyName}
+ORG:${CONFIG.companyName}
+TITLE:${CONFIG.agentTitle}
+TEL;TYPE=CELL:${CONFIG.phone}
+EMAIL:${CONFIG.email}
+ADR;TYPE=WORK:;;${CONFIG.locationName};;;;
+URL:${CONFIG.facebookUrl}
+END:VCARD`;
+
+            const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.setAttribute('download', `${CONFIG.companyName.replace(/\s+/g, '_')}_contact.vcf`);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast("جاري تحميل ملف جهة الاتصال...");
+        }
+
+        // Clipboard Helper
+        function copyToClipboard(text) {
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+        }
+
+        // Toast Helper
+        function showToast(message) {
+            const toast = document.getElementById('card-toast');
+            document.getElementById('toast-text').innerText = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
