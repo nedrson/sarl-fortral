@@ -99,22 +99,22 @@
             <p class="text-slate-400 text-xs md:text-sm font-semibold mt-0.5" id="txt-sub-title">Commissionnaire en Douane Agrée</p>
 
             <div class="grid grid-cols-3 gap-2.5 md:gap-3 my-6 md:my-8">
-                
-                <!-- Phone Call Button -->
-                <a id="btn-phone" href="#" class="glass-panel p-3 md:p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition group">
+
+                <!-- Phone Call Button (opens number chooser) -->
+                <button onclick="openChooser('phone')" class="glass-panel p-3 md:p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition group cursor-pointer">
                     <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-lg md:text-xl group-hover:scale-110 transition">
                         <i class="fa-solid fa-phone"></i>
                     </div>
                     <span class="text-[11px] md:text-xs font-bold text-slate-200">اتصال</span>
-                </a>
+                </button>
 
-                <!-- WhatsApp Button -->
-                <a id="btn-whatsapp" href="#" target="_blank" class="glass-panel p-3 md:p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition group">
+                <!-- WhatsApp Button (opens number chooser) -->
+                <button onclick="openChooser('whatsapp')" class="glass-panel p-3 md:p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition group cursor-pointer">
                     <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-green-500/15 text-green-400 flex items-center justify-center text-lg md:text-xl group-hover:scale-110 transition">
                         <i class="fa-brands fa-whatsapp"></i>
                     </div>
                     <span class="text-[11px] md:text-xs font-bold text-slate-200">واتساب</span>
-                </a>
+                </button>
 
                 <!-- Facebook Page Button -->
                 <a id="btn-facebook" href="#" target="_blank" class="glass-panel p-3 md:p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition group">
@@ -196,6 +196,19 @@
         </div>
     </div>
 
+    <!-- Number chooser (bottom sheet) -->
+    <div id="chooser" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-3" onclick="if(event.target===this)closeChooser()">
+        <div class="w-full max-w-sm bg-slate-900 border border-slate-700 rounded-3xl p-5 card-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <h3 id="chooser-title" class="text-sm font-bold text-white"></h3>
+                <button onclick="closeChooser()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 flex items-center justify-center cursor-pointer" aria-label="إغلاق">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="chooser-options" class="space-y-2.5"></div>
+        </div>
+    </div>
+
     <div id="card-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-800 border border-amber-500/50 text-amber-300 px-5 py-2.5 rounded-xl text-xs font-bold shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2">
         <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
         <span id="toast-text">تم النسخ بنجاح</span>
@@ -213,11 +226,16 @@
             companyName: 'TRANSIT Y&H',                       // اسم الشركة أو المكتب
             agentTitle: 'وكيل عبور وتخليص جمركي معتمد',       // الصفة باللغة العربية
             subTitle: 'Commissionnaire en Douane Agrée',       // الصفة بالفرنسية
-            phone1: '0540207027',   // رقم الأول
-            phone2: '0541120409',   // رقم الثاني ← بدّله
-            whatsapp1: '213540207027',  // واتساب الأول
-            whatsapp2: '213541120409',  // واتساب الثاني ← بدّله
-            email: 'hyfortral@gmail.com',                   // البريد الإلكتروني
+
+            // أرقام الهاتف (رقمان) — اترك الرقم الثاني فارغاً '' لإخفائه
+            phone1: '0540207027',                              // رقم الهاتف الأول
+            phone2: '0550000000',                              // رقم الهاتف الثاني  ← بدّله برقمك
+
+            // أرقام الواتساب (رقمان) بدون رمز + — اترك الثاني فارغاً '' لإخفائه
+            whatsapp1: '213540207027',                         // رقم الواتساب الأول
+            whatsapp2: '213550000000',                         // رقم الواتساب الثاني ← بدّله برقمك
+
+            email: 'hyfortral@gmail.com',                      // البريد الإلكتروني
             facebookUrl: 'https://www.facebook.com/profile.php?id=61594736069463',          // رابط صفحة الفيسبوك
             linkedinUrl: 'https://www.linkedin.com/in/transit-y-h-884574350/',          // رابط حساب أو صفحة لينكد إن
             tiktokUrl: 'https://www.tiktok.com/@transityh',              // رابط حساب تيك توك
@@ -225,23 +243,76 @@
             mapsUrl: 'https://maps.google.com/?q=Annaba+Port'  // رابط خرائط جوجل (يُستخدم في شارة الموقع أعلى الصورة)
         };
 
+        // يحوّل 213540207027 إلى 0540207027 للعرض
+        function localFormat(num) {
+            return num.startsWith('213') ? '0' + num.slice(3) : num;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            // Apply text content
             document.getElementById('txt-company-name').innerText = CONFIG.companyName;
             document.getElementById('txt-agent-title').innerText = CONFIG.agentTitle;
             document.getElementById('txt-sub-title').innerText = CONFIG.subTitle;
             document.getElementById('txt-location').innerText = CONFIG.locationName;
 
-            // Apply links
-            document.getElementById('btn-phone').href = 'tel:' + CONFIG.phone;
-            document.getElementById('btn-whatsapp').href = 'https://wa.me/' + CONFIG.whatsapp;
             document.getElementById('btn-facebook').href = CONFIG.facebookUrl;
             document.getElementById('btn-linkedin').href = CONFIG.linkedinUrl;
             document.getElementById('btn-tiktok').href = CONFIG.tiktokUrl;
             document.getElementById('badge-map-link').href = CONFIG.mapsUrl;
         });
 
-        
+        // اختيار بين الرقم الأول والثاني
+        function openChooser(type) {
+            const isPhone = type === 'phone';
+            const numbers = (isPhone ? [CONFIG.phone1, CONFIG.phone2] : [CONFIG.whatsapp1, CONFIG.whatsapp2]).filter(Boolean);
+
+            // إذا كان هناك رقم واحد فقط، افتحه مباشرة
+            if (numbers.length === 1) {
+                openNumber(type, numbers[0]);
+                return;
+            }
+
+            document.getElementById('chooser-title').innerText = isPhone ? 'اختر رقم الاتصال' : 'اختر رقم الواتساب';
+
+            const iconClass = isPhone ? 'fa-solid fa-phone' : 'fa-brands fa-whatsapp';
+            const colorClass = isPhone ? 'bg-emerald-500/15 text-emerald-400' : 'bg-green-500/15 text-green-400';
+            const labels = ['الرقم الأول', 'الرقم الثاني'];
+
+            const box = document.getElementById('chooser-options');
+            box.innerHTML = '';
+            numbers.forEach((num, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full glass-panel p-3.5 rounded-2xl flex items-center gap-3 transition cursor-pointer text-right';
+                btn.innerHTML = `
+                    <div class="w-10 h-10 rounded-xl ${colorClass} flex items-center justify-center text-lg flex-shrink-0">
+                        <i class="${iconClass}"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-[11px] font-semibold text-slate-400">${labels[i]}</div>
+                        <div dir="ltr" class="text-sm font-bold text-slate-100 text-right">${isPhone ? num : localFormat(num)}</div>
+                    </div>`;
+                btn.onclick = () => { closeChooser(); openNumber(type, num); };
+                box.appendChild(btn);
+            });
+
+            const chooser = document.getElementById('chooser');
+            chooser.classList.remove('hidden');
+            chooser.classList.add('flex');
+        }
+
+        function closeChooser() {
+            const chooser = document.getElementById('chooser');
+            chooser.classList.add('hidden');
+            chooser.classList.remove('flex');
+        }
+
+        function openNumber(type, num) {
+            if (type === 'phone') {
+                window.location.href = 'tel:' + num;
+            } else {
+                window.open('https://wa.me/' + num, '_blank');
+            }
+        }
+
         // Copy Email Action
         function handleEmailCopy() {
             copyToClipboard(CONFIG.email);
@@ -267,12 +338,17 @@
 
         // Save Contact as VCard (.vcf)
         function downloadVCard() {
+            const telLines = [CONFIG.phone1, CONFIG.phone2]
+                .filter(Boolean)
+                .map(n => `TEL;TYPE=CELL:${n}`)
+                .join('\n');
+
             const vcardData = `BEGIN:VCARD
 VERSION:3.0
 FN:${CONFIG.companyName}
 ORG:${CONFIG.companyName}
 TITLE:${CONFIG.agentTitle}
-TEL;TYPE=CELL:${CONFIG.phone}
+${telLines}
 EMAIL:${CONFIG.email}
 ADR;TYPE=WORK:;;${CONFIG.locationName};;;;
 URL:${CONFIG.facebookUrl}
